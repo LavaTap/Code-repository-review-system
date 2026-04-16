@@ -1,7 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import CodeReview from './views/CodeReview.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <CodeReview />
 </template>
