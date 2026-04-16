@@ -1,5 +1,17 @@
+# === Web Framework ===
 flask>=3.0.0
-langchain
-langchain-community
-langchain-ollama
-langchain-chroma
+flask-cors>=4.0.0
+
+# === LLM & LangChain ===
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langchain-core>=0.3.0
+
+# === Database ===
+sqlalchemy>=2.0.0
+
+# === Configuration ===
+python-dotenv>=1.0.0
+
+# === Security (password hashing) ===
+werkzeug>=3.0.0
