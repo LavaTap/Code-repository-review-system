@@ -1,6 +1,6 @@
 ---
 name: langchain-deepseek-agent
-overview: 删除现有前端(client)，基于 LangChain + DeepSeek V3 搭建 AI Agent 后端服务，包含 Agent 核心逻辑、API 接口和对话功能。
+overview: 基于 LangChain + DeepSeek V3 搭建 AI Agent 后端服务，包含 Agent 核心逻辑、API 接口和对话功能。
 todos:
   - id: cleanup-frontend
     content: 删除 client/ 目录及根目录 package.json、package-lock.json 前端文件

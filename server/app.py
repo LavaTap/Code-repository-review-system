@@ -6,7 +6,8 @@ AI 代码审查系统 - Flask 应用入口
 """
 import logging
 import sys
-from flask import Flask, jsonify, cors
+from flask import Flask, jsonify
+from flask_cors import CORS
 
 # 配置日志
 logging.basicConfig(
@@ -16,8 +17,15 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# 导入配置（必须在 Flask 创建前）
-from .config import config as app_config
+# 兼容直接运行 (python app.py) 和包内运行
+try:
+    from .config import config as app_config
+except ImportError:
+    from config import config as app_config
+try:
+    from .database import init_db
+except ImportError:
+    from database import init_db
 
 
 def create_app() -> Flask:
@@ -36,10 +44,9 @@ def create_app() -> Flask:
     app.config["DEBUG"] = app_config.debug
     
     # 启用 CORS
-    cors.CORS(app)
+    CORS(app)
     
     # 初始化数据库
-    from .database import init_db
     try:
         init_db()
         logger.info("Database initialized successfully")
@@ -47,10 +54,10 @@ def create_app() -> Flask:
         logger.error(f"Database initialization failed: {e}")
         sys.exit(1)
     
-    # 注册路由蓝图
-    from .routes.auth import auth_bp
-    from .routes.review import review_bp
-    from .routes.webhook import webhook_bp
+    # 注册路由蓝图（使用绝对导入）
+    from routes.auth import auth_bp
+    from routes.review import review_bp
+    from routes.webhook import webhook_bp
     
     app.register_blueprint(auth_bp)
     app.register_blueprint(review_bp)

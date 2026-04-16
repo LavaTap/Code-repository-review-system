@@ -2,7 +2,7 @@
 
 ## 项目概述
 
-本项目基于**百度 Python 编码规范**和**Python 项目规范**，提供了一个完整的代码审查解决方案，包括：
+本项目基于** Python 编码规范**和**Python 项目规范**，提供了一个完整的代码审查解决方案，包括：
 
 1. **智能体配置** - CodeBuddy 智能体定义
 2. **后端 API** - Python Flask 提供的代码审查服务
@@ -26,7 +26,7 @@ Code-repository&review/
 │       │   └── CodeReview.vue    # 代码审查页面
 │       └── router/
 │           └── index.ts          # 路由配置
-├── 百度-Python-编码规范.md        # 百度 Python 编码规范文档
+├── -Python-编码规范.md        #  Python 编码规范文档
 └── Python-项目规范.md             # Python 项目规范文档
 ```
 
@@ -306,5 +306,5 @@ A: 编辑 `server/code_review_api.py`，修改 `level` 字段：
 
 ## 参考文档
 
-- [百度 Python 编码规范](./百度-Python-编码规范.md)
+- [ Python 编码规范](./-Python-编码规范.md)
 - [Python 项目规范](./Python-项目规范.md)

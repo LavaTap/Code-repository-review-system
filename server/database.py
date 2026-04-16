@@ -6,8 +6,12 @@ import logging
 from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
-from .config import config
-from .models import Base
+try:
+    from .config import config
+    from .models import Base
+except ImportError:
+    from config import config
+    from models import Base
 
 logger = logging.getLogger(__name__)
 

@@ -10,7 +10,7 @@ from typing import Generator
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from ..config import config as app_config
+from config import config as app_config
 from .prompts import load_system_prompt
 
 logger = logging.getLogger(__name__)

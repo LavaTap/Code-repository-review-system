@@ -17,10 +17,10 @@ import logging
 
 from flask import Blueprint, request, jsonify
 
-from ..agent.code_review_agent import get_agent
-from ..config import config as app_config
-from ..database import get_session
-from ..models import User, Review
+from agent.code_review_agent import get_agent
+from config import config as app_config
+from database import get_session
+from models import User, Review
 
 logger = logging.getLogger(__name__)
 webhook_bp = Blueprint("webhook", __name__, url_prefix="/api/webhook")

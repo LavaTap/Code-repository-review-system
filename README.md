@@ -208,6 +208,47 @@ curl -X POST http://localhost:5000/api/auth/register \
    - 有 `[强制]` 问题 → `status=failed` → `merge_allowed=false` → **阻止合并**
    - 无强制问题 → `status=passed` → `merge_allowed=true` → **允许合并**
 
+
+### 示例
+
+test_review.py (发起请求)
+         │
+         │  POST /api/review
+         │  Body: {"code": "...", "filename": "bad_example.py"}
+         ▼
+┌─────────────────────────────────────────────────────────┐
+│  routes/review.py  (接收请求)                            │
+│    1. request.get_json() 提取 code + filename           │
+│    2. agent = get_agent()                               │
+│    3. result = agent.review(code, filename)              │
+└─────────────────────────────────────────────────────────┘
+         │
+         │  调用 agent.review()
+         ▼
+┌─────────────────────────────────────────────────────────┐
+│  agent/code_review_agent.py  (核心逻辑)                  │
+│                                                         │
+│  Step 1: load_system_prompt()                           │
+│          ↓ 读取 .codebuddy/agents/agent.md 规范文件     │
+│                                                         │
+│  Step 2: _build_messages(code, filename)                │
+│          构造消息: [SystemMessage(规范) + HumanMessage(代码)]
+│                                                         │
+│  Step 3: llm.invoke(messages)                           │
+│          LangChain ChatOpenAI → DeepSeek V3 API         │
+│                                                         │
+│  Step 4: _check_mandatory_issues(raw_result)            │
+│          用正则检测是否有 [强制] 标记                    │
+│                                                         │
+│  Step 5: 组装结果 dict                                  │
+│          返回: {status, has_mandatory_issues, ...}      │
+└─────────────────────────────────────────────────────────┘
+         │
+         │  返回 JSON
+         ▼
+test_review.py (输出结果)
+
+
 ## License
 
 MIT License

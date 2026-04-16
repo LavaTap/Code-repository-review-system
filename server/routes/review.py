@@ -8,9 +8,9 @@ import json
 import logging
 from flask import Blueprint, request, jsonify, Response, stream_with_context
 
-from ..agent.code_review_agent import get_agent
-from ..database import get_session
-from ..models import Review
+from agent.code_review_agent import get_agent
+from database import get_session
+from models import Review
 
 logger = logging.getLogger(__name__)
 review_bp = Blueprint("review", __name__, url_prefix="/api/review")
